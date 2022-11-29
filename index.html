@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Advice generator app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body>
+    <div class="advice-container">
+      <header>ADVICE #<span id="adviceId"></span></header>
+      <h1 class="advice-text"><span id="advice">Placeholder text</span></h1>
+      <img class="divider" src="./images/pattern-divider-desktop.svg" alt="" />
+      <button class="dice" onclick="newAdvice()">
+        <img src="./images/icon-dice.svg" alt="" />
+      </button>
+    </div>
+
+    <!-- Advice #<span id="adviceId"></span>
+
+    <h1>"<span id="advice"></span>"</h1> -->
+
+    <!-- <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Nicolas Perussi</a>.
+    </div> -->
+  </body>
+
+  <script>
+    function newAdvice() {
+      fetch('https://api.adviceslip.com/advice')
+        .then((response) => response.json())
+        .then((data) => {
+          advice = data.slip;
+          console.log(advice);
+          adviceIdSpan = document.getElementById('adviceId');
+          adviceSpan = document.getElementById('advice');
+
+          adviceIdSpan.innerHTML = advice.id;
+          adviceSpan.innerHTML = advice.advice;
+        });
+    }
+
+    newAdvice();
+  </script>
+</html>
